@@ -35,6 +35,9 @@ const LeftSideImage = ({ image }: Props) => {
         alt="grerzat"
         src="/images/grerza-white.png"
       />
+      <Box position="absolute">
+        <h1>Adonis Shala</h1>
+      </Box>
     </Box>
   );
 };

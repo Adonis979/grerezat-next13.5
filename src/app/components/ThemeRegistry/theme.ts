@@ -4,6 +4,14 @@ const theme = createTheme({
   typography: {
     fontFamily: "graphik, sans-serif",
   },
+  palette: {
+    error: {
+      main: "#E7473C",
+    },
+    secondary: {
+      main: "#343434",
+    },
+  },
   components: {
     MuiTextField: {
       styleOverrides: {
@@ -26,6 +34,7 @@ const theme = createTheme({
         },
       },
     },
+
     MuiButton: {
       variants: [
         {

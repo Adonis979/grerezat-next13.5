@@ -12,14 +12,14 @@ const SignIn = () => {
         onClick={() => {
           router.push("/registration");
         }}
-        color="warning"
+        color="secondary"
       >
         Create Account
       </Button>
       <Button
         variant="outlined"
         onClick={() => router.push("/login")}
-        color="error"
+        color="primary"
       >
         Log In
       </Button>
