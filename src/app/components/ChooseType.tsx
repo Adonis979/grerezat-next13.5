@@ -66,6 +66,7 @@ const ChooseType = () => {
           <Box display="flex" gap="22px">
             {AccType.map((data) => (
               <motion.div
+                key={data.name}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{

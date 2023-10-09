@@ -72,7 +72,7 @@ const Subscriptions = ({ index, subscription }: any) => {
             alignItems="center"
           >
             <Typography display="flex" alignItems="center" gap="10px">
-              {subscription.name !== "Free" ? (
+              {subscription.name !== "1 Month Free Trial" ? (
                 <CheckIcon color="success" />
               ) : (
                 <ClearIcon color="error" />
@@ -80,7 +80,7 @@ const Subscriptions = ({ index, subscription }: any) => {
               Verified seller
             </Typography>
             <Typography display="flex" alignItems="center" gap="10px">
-              {subscription.name !== "Free" ? (
+              {subscription.name !== "1 Month Free Trial" ? (
                 <CheckIcon color="success" />
               ) : (
                 <ClearIcon color="error" />
@@ -88,7 +88,7 @@ const Subscriptions = ({ index, subscription }: any) => {
               Unlimited listings per day
             </Typography>
             <Typography display="flex" alignItems="center" gap="10px">
-              {subscription.name !== "Free" ? (
+              {subscription.name !== "1 Month Free Trial" ? (
                 <CheckIcon color="success" />
               ) : (
                 <ClearIcon color="error" />

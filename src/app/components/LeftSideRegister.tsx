@@ -16,8 +16,8 @@ const LeftSideRegister = () => {
       <Image
         src="/images/LogoFooter.png"
         alt="logo-footer"
-        width={550}
-        height={420}
+        width={400}
+        height={380}
         style={{ position: "absolute", left: "0", bottom: "0" }}
       />
       <Box display="flex" flexDirection="column" alignItems="start" ml="60px">

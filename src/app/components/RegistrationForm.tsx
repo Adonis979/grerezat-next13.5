@@ -2,9 +2,13 @@
 import {
   Box,
   Button,
+  FormControl,
   Grid,
   IconButton,
   InputAdornment,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
@@ -16,6 +20,8 @@ import { useRouter } from "next/navigation";
 import { register } from "../lib/api-requests/user";
 import BackDropLoader from "./BackDropLoader";
 import { useCookies } from "react-cookie";
+import Image from "next/image";
+import { motion } from "framer-motion";
 
 const RegistrationFormBusiness = ({ type }: any) => {
   const router = useRouter();
@@ -27,8 +33,23 @@ const RegistrationFormBusiness = ({ type }: any) => {
   const { password, passwordError, handleChangePassword, validatePassword } =
     usePassword();
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassowrd] = useState(false);
+  const [confirmPassword, setConfirmPassowrd] = useState("");
+  const [confirmPasswordError, setConfirmPassowrdError] = useState({
+    error: false,
+    helperTexT: "",
+  });
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
   const handleSubmit = async (event: any) => {
     event?.preventDefault();
+    if (confirmPassword !== password) {
+      setConfirmPassowrdError({
+        error: true,
+        helperTexT: "Password should match",
+      });
+      return;
+    }
     const emailError = validateEmail();
     const passwordError = validatePassword();
     if (emailError && passwordError) {
@@ -58,49 +79,79 @@ const RegistrationFormBusiness = ({ type }: any) => {
     setLoader(false);
   };
   return (
-    <>
+    <Box
+      display="flex"
+      width="100%"
+      justifyContent="center"
+      alignItems="flex-start"
+      gap="20px"
+    >
       <BackDropLoader
         openLoader={loader}
         closeLoader={() => setLoader(false)}
       />
+
+      <Box mt="10px">
+        <Image
+          src="/images/Person-Red.png"
+          alt="person"
+          width={69}
+          height={76}
+        />
+      </Box>
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: "10px",
-          marginTop: { xs: "40px", sm: "none" },
+          gap: "30px",
           width: { xs: "80%", md: "60%" },
         }}
       >
-        <Box>
-          <Typography
-            variant="h3"
-            sx={{
-              color: "#0E2F56",
-            }}
-          >
-            EXPLORE WITH US
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
-              color: "#272727",
-              marginLeft: "10px",
-            }}
-          >
-            Inform us more about your business
-          </Typography>
+        <Typography
+          variant="h3"
+          sx={{
+            color: "#E7473C",
+          }}
+          fontWeight={900}
+        >
+          SIGN UP!
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            color: "#E7473C",
+            marginLeft: "5px",
+            width: "42%",
+          }}
+        >
+          We are glad that you picked the kind of account you want. Now, please
+          fill in the empty spaces !
+        </Typography>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.1,
+            ease: [0, 0.71, 0.2, 1.01],
+            scale: {
+              type: "spring",
+              damping: 15,
+              stiffness: 300,
+              restDelta: 0.001,
+            },
+          }}
+        >
           <Box
             component="form"
             onSubmit={handleSubmit}
             display="flex"
             flexDirection="column"
-            gap="20px"
+            gap="30px"
             mt="20px"
           >
             <TextField
               required
-              placeholder="Company Name"
+              placeholder="Full Name"
               fullWidth
               onChange={(event) => setName(event?.target.value)}
             />
@@ -134,6 +185,61 @@ const RegistrationFormBusiness = ({ type }: any) => {
               error={passwordError.error}
               helperText={passwordError.helperText}
             />
+            <TextField
+              required
+              type={showConfirmPassword ? "text" : "password"}
+              error={confirmPasswordError.error}
+              helperText={confirmPasswordError.helperTexT}
+              onChange={(event) => {
+                setConfirmPassowrd(event.target.value);
+                setConfirmPassowrdError({ error: false, helperTexT: "" });
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() =>
+                        setShowConfirmPassowrd(!showConfirmPassword)
+                      }
+                      edge="end"
+                    >
+                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              placeholder="Verify Password"
+              fullWidth
+            />
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              gap="20px"
+            >
+              <TextField
+                required
+                placeholder="City"
+                value={city}
+                fullWidth
+                onChange={(event) => setCity(event?.target.value)}
+              />
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Country</InputLabel>
+                <Select
+                  onChange={(event) =>
+                    setCountry(event?.target.value as string)
+                  }
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  label="Country"
+                >
+                  <MenuItem value={10}>Albania</MenuItem>
+                  <MenuItem value={20}>Kosovo</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
             <Box
               display="flex"
               alignItems="center"
@@ -141,20 +247,26 @@ const RegistrationFormBusiness = ({ type }: any) => {
               gap="20px"
             >
               <Button
-                variant="outlined"
-                color="error"
+                variant="contained"
+                sx={{ color: "white", bgcolor: "#E0DCC1", height: "50px" }}
+                color="secondary"
                 onClick={() => router.push("/register")}
               >
                 Go Back
               </Button>
-              <Button variant="outlined" color="success" type="submit">
+              <Button
+                variant="contained"
+                color="error"
+                type="submit"
+                sx={{ height: "50px" }}
+              >
                 Register
               </Button>
             </Box>
           </Box>
-        </Box>
+        </motion.div>
       </Box>
-    </>
+    </Box>
   );
 };
 

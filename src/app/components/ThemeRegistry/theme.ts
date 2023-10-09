@@ -35,6 +35,15 @@ const theme = createTheme({
       },
     },
 
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          borderRadius: "15px",
+          backgroundColor: "#f5f2f2",
+        },
+      },
+    },
+
     MuiButton: {
       variants: [
         {

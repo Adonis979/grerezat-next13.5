@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 
 const freeSubscription = {
   _id: "0",
-  name: "Free",
+  name: "1 Month Free Trial",
   description: "1 Month Free Trial",
   price: 0,
   currency: "EUR",
