@@ -19,7 +19,7 @@ const Login = () => {
         justifyContent="center"
         bgcolor="#FFF6F6"
       >
-        {/* Righ side LoginForm */}
+        {/* Right side LoginForm */}
         <LoginForm />
       </Grid>
     </Grid>

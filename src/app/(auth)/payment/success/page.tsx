@@ -18,9 +18,7 @@ const Success = async ({ searchParams }: any) => {
   const cookieStore = cookies();
   const token = cookieStore.get("token");
   const subscription = cookieStore.get("subscription");
-  console.log(token);
   const result = apiCall(searchParams, token, subscription);
-  console.log(result);
   return <h1>Success</h1>;
 };
 
